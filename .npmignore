@@ -1,0 +1,42 @@
+# Source files
+src/
+*.ts
+!*.d.ts
+
+# Tests
+*.test.ts
+*.spec.ts
+__tests__/
+test-files/
+coverage/
+
+# Config files
+tsconfig.json
+jest.config.js
+
+# Documentation
+CLAUDE_CONFIG.md
+SUMMARY.md
+
+# Development
+.git/
+.github/
+.vscode/
+.idea/
+*.log
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build artifacts (keep dist/)
+*.tsbuildinfo
+
+# Examples
+example.ts

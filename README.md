@@ -9,10 +9,21 @@ Un servidor MCP (Model Context Protocol) para leer y extraer información de arc
 - 📖 Lectura de páginas específicas
 - 🔍 Búsqueda de texto con contexto
 - 📏 Conteo de páginas
+- 🖼️ Listado y extracción de imágenes
 
 ## Instalación
 
+### Desde npm (recomendado)
+
 ```bash
+npm install -g @rturv/mcp-pdf-reader
+```
+
+### Desde el código fuente
+
+```bash
+git clone https://github.com/rturv/mcp-pdf-reader.git
+cd mcp-pdf-reader
 npm install
 npm run build
 ```
@@ -22,6 +33,10 @@ npm run build
 ### Como servidor MCP independiente
 
 ```bash
+# Si instalaste globalmente
+mcp-pdf-reader
+
+# Si instalaste desde el código fuente
 npm start
 ```
 
@@ -29,6 +44,30 @@ npm start
 
 Añade esto a tu archivo de configuración de Claude Desktop (`claude_desktop_config.json`):
 
+**Con instalación global:**
+```json
+{
+  "mcpServers": {
+    "pdf-reader": {
+      "command": "mcp-pdf-reader"
+    }
+  }
+}
+```
+
+**Con instalación local:**
+```json
+{
+  "mcpServers": {
+    "pdf-reader": {
+      "command": "npx",
+      "args": ["@rturv/mcp-pdf-reader"]
+    }
+  }
+}
+```
+
+**Desde el código fuente:**
 ```json
 {
   "mcpServers": {
@@ -39,6 +78,25 @@ Añade esto a tu archivo de configuración de Claude Desktop (`claude_desktop_co
   }
 }
 ```
+
+### Configuración en VS Code (GitHub Copilot)
+
+Edita el archivo `mcpServers.json` en `%APPDATA%\Code\User\globalStorage\github.copilot-chat\mcpServers.json`:
+
+**Con instalación global:**
+```json
+{
+  "mcpServers": {
+    "pdf-reader": {
+      "command": "mcp-pdf-reader",
+      "args": [],
+      "disabled": false
+    }
+  }
+}
+```
+
+Ver [COPILOT_CONFIG.md](COPILOT_CONFIG.md) para más detalles.
 
 ## Herramientas disponibles
 

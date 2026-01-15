@@ -1,5 +1,5 @@
 {
-  "name": "mcp-pdf-reader",
+  "name": "@rturv/mcp-pdf-reader",
   "version": "1.0.0",
   "description": "MCP Server for reading and extracting information from PDF files",
   "main": "dist/index.js",
@@ -13,16 +13,40 @@
     "start": "node dist/index.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build && npm test"
   },
   "keywords": [
     "mcp",
     "pdf",
     "reader",
-    "model-context-protocol"
+    "model-context-protocol",
+    "pdf-extraction",
+    "copilot",
+    "claude",
+    "anthropic"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "rturv",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rturv/mcp-pdf-reader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rturv/mcp-pdf-reader/issues"
+  },
+  "homepage": "https://github.com/rturv/mcp-pdf-reader#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.2",
     "pdf-lib": "^1.17.1",
