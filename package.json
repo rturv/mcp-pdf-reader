@@ -1,6 +1,6 @@
 {
   "name": "@rturv/mcp-pdf-reader",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "MCP Server for reading and extracting information from PDF files",
   "main": "dist/index.js",
   "type": "module",
