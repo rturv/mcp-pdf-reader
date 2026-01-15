@@ -1,28 +1,31 @@
 # Resumen del Proyecto MCP PDF Reader
 
-## ✅ Proyecto Completado
+## Proyecto Completado
 
 Se ha desarrollado exitosamente un servidor MCP (Model Context Protocol) para leer y extraer información de archivos PDF.
 
 ## 📁 Estructura Creada
 
-```
+```text
 mcp-pdf-reader/
 ├── src/
 │   ├── __tests__/
-│   │   └── pdf-tools.test.ts    # Tests unitarios
-│   ├── index.ts                  # Servidor MCP principal
-│   ├── pdf-tools.ts              # Funciones de lectura de PDF
-│   └── types.ts                  # Tipos TypeScript
-├── test-files/                   # Carpeta para PDFs de prueba
-├── dist/                         # Código compilado
-├── package.json                  # Configuración del proyecto
-├── tsconfig.json                 # Configuración TypeScript
-├── jest.config.js                # Configuración de tests
-├── README.md                     # Documentación principal
-├── CLAUDE_CONFIG.md              # Guía de configuración para Claude
-├── example.ts                    # Ejemplo de uso
-└── .gitignore                    # Archivos ignorados por git
+│   │   └── pdf-tools.test.ts        # Tests unitarios
+│   ├── index.ts                     # Servidor MCP principal
+│   ├── pdf-tools.ts                 # Funciones de lectura de PDF
+│   └── types.ts                     # Tipos TypeScript
+├── test-files/                       # Carpeta para PDFs de prueba
+├── dist/                             # Código compilado
+├── LICENSE
+├── CHANGELOG.md
+├── package.json                      # Configuración del proyecto
+├── tsconfig.json                     # Configuración TypeScript
+├── jest.config.js                    # Configuración de tests
+├── README.md                         # Documentación principal
+├── CLAUDE_CONFIG.md                  # Guía de configuración para Claude
+├── COPILOT_CONFIG.md                  # Guía de configuración para Claude
+├── example.ts                        # Ejemplo de uso
+└── Makefile
 ```
 
 ## 🚀 Características Implementadas
@@ -37,24 +40,24 @@ mcp-pdf-reader/
 
 ### Funcionalidades:
 
-- ✅ Extracción de texto completo
-- ✅ Extracción de metadatos (título, autor, creador, fechas)
-- ✅ Lectura de páginas específicas
-- ✅ Búsqueda de texto con contexto
-- ✅ Soporte para búsqueda case-sensitive/insensitive
-- ✅ Manejo de errores robusto
-- ✅ Tests unitarios completos
-- ✅ Tipado completo con TypeScript
-- ✅ Compilación a ES Modules
+- Extracción de texto completo
+- Extracción de metadatos (título, autor, creador, fechas)
+- Lectura de páginas específicas
+- Búsqueda de texto con contexto
+- Soporte para búsqueda case-sensitive/insensitive
+- Manejo de errores robusto
+- Tests unitarios completos
+- Tipado completo con TypeScript
+- Compilación a ES Modules
 
 ## 🧪 Tests
 
-- ✅ **27 tests unitarios** cubriendo todas las funciones principales
-- ✅ **Todos los tests pasando** correctamente
-- ✅ **Tests específicos del contenido** del PDF proporcionado (test-files/sample.pdf)
-- ✅ **Validaciones concretas**: número de páginas, metadatos, textos específicos, búsquedas
-- ✅ **Extracción de tablas**: Test que extrae y muestra tablas en formato ASCII
-- ✅ **Procesamiento de imágenes**: Tests que listan y extraen imágenes del PDF
+- **27 tests unitarios** cubriendo todas las funciones principales
+- **Todos los tests pasando** correctamente
+- **Tests específicos del contenido** del PDF proporcionado (test-files/sample.pdf)
+- **Validaciones concretas**: número de páginas, metadatos, textos específicos, búsquedas
+- **Extracción de tablas**: Test que extrae y muestra tablas en formato ASCII
+- **Procesamiento de imágenes**: Tests que listan y extraen imágenes del PDF
 - Ejecución: `npm test`
 - Resultado: **Test Suites: 1 passed, Tests: 27 passed (3.173 s)**
 
@@ -76,7 +79,7 @@ mcp-pdf-reader/
 - **Jest** (v29.7.0) - Framework de testing
 - **ts-jest** (v29.2.5) - Preset de Jest para TypeScript
 
-## 🔧 Scripts Disponibles
+## Scripts Disponibles
 
 ```bash
 npm run build        # Compilar TypeScript a JavaScript
@@ -88,7 +91,7 @@ npm run test:watch   # Tests en modo watch
 
 ## 📝 Estado Final del Proyecto
 
-### ✅ Completado exitosamente:
+### Completado exitosamente:
 
 1. **Servidor MCP implementado** con 5 herramientas funcionales
 2. **Tests completos** ejecutados con el PDF de prueba proporcionado por el usuario
@@ -124,7 +127,7 @@ npm run build
 npm start
 ```
 
-## 📄 Notas Importantes
+## Notas Importantes
 
 - No incluye OCR (reconocimiento óptico)
 - Funciona mejor con PDFs bien formados

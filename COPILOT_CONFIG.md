@@ -7,11 +7,16 @@ Este documento explica cómo configurar el servidor MCP PDF Reader para usarlo c
 - Visual Studio Code instalado
 - GitHub Copilot con soporte MCP habilitado
 - Node.js instalado (v18 o superior)
-- El proyecto compilado (`npm run build`)
 
-## Paso 1: Compilar el proyecto
+## Paso 1: Instalar el paquete
 
-Antes de configurar, asegúrate de que el proyecto está compilado:
+Instala el paquete globalmente desde npm:
+
+```bash
+npm install -g @rturv/mcp-pdf-reader
+```
+
+**Nota para desarrollo:** Si estás desarrollando localmente, compila el proyecto:
 
 ```bash
 cd c:\Proyectos\2025\IA\mio\mcp-pdf-reader
@@ -47,14 +52,14 @@ C:\Users\[TU_USUARIO]\AppData\Roaming\Code\User\globalStorage\github.copilot-cha
 
 Abre el archivo `mcpServers.json` (créalo si no existe) y añade la siguiente configuración:
 
+### Opción A: Usando el paquete npm (recomendado)
+
 ```json
 {
   "mcpServers": {
     "pdf-reader": {
-      "command": "node",
-      "args": [
-        "c:\\Proyectos\\2025\\IA\\mio\\mcp-pdf-reader\\dist\\index.js"
-      ],
+      "command": "mcp-pdf-reader",
+      "args": [],
       "disabled": false,
       "alwaysAllow": []
     }
@@ -62,11 +67,31 @@ Abre el archivo `mcpServers.json` (créalo si no existe) y añade la siguiente c
 }
 ```
 
-### ⚠️ Notas importantes:
+### Opción B: Desarrollo local (código fuente)
 
-1. **Ruta absoluta**: Asegúrate de usar la ruta absoluta completa a tu archivo `dist/index.js`
-2. **Barras invertidas**: En Windows, usa doble barra invertida `\\` o barras normales `/`
-3. **Si ya tienes otros servidores MCP**, añade esta entrada dentro del objeto `mcpServers` existente:
+```json
+{
+  "mcpServers": {
+    "pdf-reader": {
+      "command": "node",
+      "args": [
+        "ruta/completa/a/mcp-pdf-reader/dist/index.js"
+      ],
+      "disabled": false,
+      "alwaysAllow": []
+    }
+  }
+}
+```
+> No olvides hacer npm build si vas a utilizar esta vía
+
+
+### Notas importantes:
+
+1. **Opción A (npm)**: Más simple, no necesitas rutas ni recompilar
+2. **Opción B (desarrollo)**: Usa la ruta absoluta completa a tu archivo `dist/index.js`
+3. **Barras invertidas**: En Windows, usa doble barra invertida `\\` o barras normales `/`
+4. **Si ya tienes otros servidores MCP**, añade esta entrada dentro del objeto `mcpServers` existente:
 
 ```json
 {
@@ -76,10 +101,8 @@ Abre el archivo `mcpServers.json` (créalo si no existe) y añade la siguiente c
       "args": ["..."]
     },
     "pdf-reader": {
-      "command": "node",
-      "args": [
-        "c:\\Proyectos\\2025\\IA\\mio\\mcp-pdf-reader\\dist\\index.js"
-      ],
+      "command": "mcp-pdf-reader",
+      "args": [],
       "disabled": false,
       "alwaysAllow": []
     }
@@ -141,37 +164,16 @@ Una vez configurado, puedes usar el servidor desde Copilot Chat:
 2. **Formato de ruta**: En Windows puedes usar `C:/ruta/archivo.pdf` o `C:\\ruta\\archivo.pdf`
 3. **Archivo existe**: Verifica que el archivo PDF existe y tienes permisos de lectura
 
-## Configuración alternativa (usando npm start)
-
-Si prefieres, puedes configurar el servidor para que use `npm start`:
-
-```json
-{
-  "mcpServers": {
-    "pdf-reader": {
-      "command": "npm",
-      "args": [
-        "start",
-        "--prefix",
-        "c:\\Proyectos\\2025\\IA\\mio\\mcp-pdf-reader"
-      ],
-      "disabled": false,
-      "alwaysAllow": []
-    }
-  }
-}
-```
-
 ## Herramientas disponibles
 
-### 📄 Herramientas de texto
+### Herramientas de texto
 - **read_pdf**: Extrae todo el texto del PDF
 - **get_pdf_metadata**: Obtiene metadatos (autor, título, fechas, etc.)
 - **read_pdf_pages**: Lee páginas específicas o rangos
 - **search_pdf**: Busca texto con contexto
 - **get_pdf_page_count**: Cuenta las páginas
 
-### 🖼️ Herramientas de imágenes
+### Herramientas de imágenes
 - **list_pdf_images**: Lista todas las imágenes con metadatos
 - **extract_pdf_image**: Extrae una imagen en Base64
 

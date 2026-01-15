@@ -4,12 +4,12 @@ Un servidor MCP (Model Context Protocol) para leer y extraer información de arc
 
 ## Características
 
-- 📄 Extracción completa de texto de PDFs
-- 📊 Extracción de metadatos (título, autor, fechas, etc.)
-- 📖 Lectura de páginas específicas
-- 🔍 Búsqueda de texto con contexto
-- 📏 Conteo de páginas
-- 🖼️ Listado y extracción de imágenes
+- Extracción completa de texto de PDFs
+- Extracción de metadatos (título, autor, fechas, etc.)
+- Lectura de páginas específicas
+- Búsqueda de texto con contexto
+- Conteo de páginas
+- Listado y extracción de imágenes
 
 ## Instalación
 
