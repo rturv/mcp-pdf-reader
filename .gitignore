@@ -4,5 +4,4 @@ coverage/
 *.log
 .DS_Store
 .env
-test-files/*.pdf
 !test-files/.gitkeep
