@@ -1,135 +1,137 @@
-# Resumen del Proyecto MCP PDF Reader
+# MCP PDF Reader - Project Summary
 
-## Proyecto Completado
+## Project Completion
 
-Se ha desarrollado exitosamente un servidor MCP (Model Context Protocol) para leer y extraer información de archivos PDF.
+A fully functional Model Context Protocol (MCP) server has been successfully developed to read and extract information from PDF files.
 
-## 📁 Estructura Creada
+## 📁 Project Structure
 
 ```text
 mcp-pdf-reader/
 ├── src/
 │   ├── __tests__/
-│   │   └── pdf-tools.test.ts        # Tests unitarios
-│   ├── index.ts                     # Servidor MCP principal
-│   ├── pdf-tools.ts                 # Funciones de lectura de PDF
-│   └── types.ts                     # Tipos TypeScript
-├── test-files/                       # Carpeta para PDFs de prueba
-├── dist/                             # Código compilado
+│   │   └── pdf-tools.test.ts        # Unit tests
+│   ├── index.ts                     # Main MCP server
+│   ├── pdf-tools.ts                 # PDF extraction functions
+│   └── types.ts                     # TypeScript type definitions
+├── test-files/                       # Test PDF files
+├── dist/                             # Compiled JavaScript
 ├── LICENSE
 ├── CHANGELOG.md
-├── package.json                      # Configuración del proyecto
-├── tsconfig.json                     # Configuración TypeScript
-├── jest.config.js                    # Configuración de tests
-├── README.md                         # Documentación principal
-├── CLAUDE_CONFIG.md                  # Guía de configuración para Claude
-├── COPILOT_CONFIG.md                  # Guía de configuración para Claude
-├── example.ts                        # Ejemplo de uso
+├── package.json                      # Project configuration
+├── tsconfig.json                     # TypeScript configuration
+├── jest.config.js                    # Jest test configuration
+├── README.md                         # Main documentation
+├── CLAUDE_CONFIG.md                  # Claude Desktop setup guide
+├── COPILOT_CONFIG.md                 # GitHub Copilot setup guide
+├── example.ts                        # Usage example
 └── Makefile
 ```
 
-## 🚀 Características Implementadas
+## 🚀 Implemented Features
 
-### 5 Herramientas MCP:
+### 7 MCP Tools:
 
-1. **read_pdf** - Extrae todo el texto de un PDF con opción de incluir metadatos
-2. **get_pdf_metadata** - Obtiene metadatos (título, autor, fechas, etc.)
-3. **read_pdf_pages** - Extrae texto de páginas específicas o rangos
-4. **search_pdf** - Busca texto en el PDF con soporte para case-sensitive
-5. **get_pdf_page_count** - Obtiene el número total de páginas
+1. **read_pdf** - Extract all text from a PDF with optional metadata
+2. **get_pdf_metadata** - Retrieve document metadata (title, author, dates, etc.)
+3. **read_pdf_pages** - Extract text from specific pages or page ranges
+4. **search_pdf** - Search for text in PDF with case-sensitivity support
+5. **get_pdf_page_count** - Get total number of pages
+6. **list_pdf_images** - List all embedded images with metadata
+7. **extract_pdf_image** - Extract specific images as Base64-encoded data
 
-### Funcionalidades:
+### Capabilities:
 
-- Extracción de texto completo
-- Extracción de metadatos (título, autor, creador, fechas)
-- Lectura de páginas específicas
-- Búsqueda de texto con contexto
-- Soporte para búsqueda case-sensitive/insensitive
-- Manejo de errores robusto
-- Tests unitarios completos
-- Tipado completo con TypeScript
-- Compilación a ES Modules
+- Full text extraction
+- Metadata extraction (title, author, creator, dates)
+- Page-specific reading
+- Text search with context
+- Case-sensitive/insensitive search support
+- Robust error handling
+- Complete unit tests
+- Full TypeScript typing
+- ES Module compilation
 
 ## 🧪 Tests
 
-- **27 tests unitarios** cubriendo todas las funciones principales
-- **Todos los tests pasando** correctamente
-- **Tests específicos del contenido** del PDF proporcionado (test-files/sample.pdf)
-- **Validaciones concretas**: número de páginas, metadatos, textos específicos, búsquedas
-- **Extracción de tablas**: Test que extrae y muestra tablas en formato ASCII
-- **Procesamiento de imágenes**: Tests que listan y extraen imágenes del PDF
-- Ejecución: `npm test`
-- Resultado: **Test Suites: 1 passed, Tests: 27 passed (3.173 s)**
+- **27 unit tests** covering all main functions
+- **All tests passing** successfully
+- **PDF-specific validations** (test-files/sample.pdf)
+- **Concrete assertions**: page count, metadata, specific text, search results
+- **Table extraction**: Tests extracting and displaying tables in ASCII format
+- **Image processing**: Tests listing and extracting images from PDFs
+- Run: `npm test`
+- Result: **Test Suites: 1 passed, Tests: 27 passed (3.173 s)**
 
-### Detalles de los tests:
-- **getPageCount** (2 tests): Validación del conteo exacto de 6 páginas
-- **extractMetadata** (2 tests): Verificación de autor, creador, productor y fechas
-- **extractTextFromPDF** (3 tests): Extracción completa y validación de contenidos específicos
-- **extractPages** (6 tests): Extracción de páginas individuales, rangos, y validación de errores
-- **searchInPDF** (8 tests): Búsquedas de términos específicos, case-sensitivity, contexto
-- **Table Extraction** (1 test): Extracción y visualización de tabla en formato ASCII
-- **PDF Images** (5 tests): Listado y extracción de imágenes incrustadas
+### Test Details:
+- **getPageCount** (2 tests): Validation of exact 6-page count
+- **extractMetadata** (2 tests): Verification of author, creator, producer, and dates
+- **extractTextFromPDF** (3 tests): Full extraction and specific content validation
+- **extractPages** (6 tests): Individual pages, page ranges, and error validation
+- **searchInPDF** (8 tests): Specific term searches, case-sensitivity, context
+- **Table Extraction** (1 test): Table extraction and ASCII format display
+- **PDF Images** (5 tests): Listing and extraction of embedded images
 
-## 📦 Tecnologías Utilizadas
+## 📦 Technology Stack
 
-- **@modelcontextprotocol/sdk** (v1.25.2) - SDK MCP
-- **pdf-parse** (v2.4.5) - Librería para parsear PDFs (texto)
-- **pdf-lib** (v1.17.1) - Librería para manipulación de PDFs (imágenes)
-- **TypeScript** (v5.9.3) - Lenguaje con tipado estático
-- **Jest** (v29.7.0) - Framework de testing
-- **ts-jest** (v29.2.5) - Preset de Jest para TypeScript
+- **@modelcontextprotocol/sdk** (v1.25.2) - MCP SDK
+- **pdf-parse** (v2.4.5) - PDF parsing library (text extraction)
+- **pdf-lib** (v1.17.1) - PDF manipulation library (image extraction)
+- **TypeScript** (v5.9.3) - Statically-typed language
+- **Jest** (v29.7.0) - Testing framework
+- **ts-jest** (v29.2.5) - Jest TypeScript preset
 
-## Scripts Disponibles
+## Scripts
 
 ```bash
-npm run build        # Compilar TypeScript a JavaScript
-npm run dev          # Modo desarrollo (watch)
-npm start            # Ejecutar servidor MCP
-npm test             # Ejecutar tests
-npm run test:watch   # Tests en modo watch
+npm run build        # Compile TypeScript to JavaScript
+npm run dev          # Development mode (watch)
+npm start            # Start MCP server
+npm test             # Run tests
+npm run test:watch   # Tests in watch mode
 ```
 
-## 📝 Estado Final del Proyecto
+## 📝 Project Status
 
-### Completado exitosamente:
+### Successfully Completed:
 
-1. **Servidor MCP implementado** con 5 herramientas funcionales
-2. **Tests completos** ejecutados con el PDF de prueba proporcionado por el usuario
-3. **Compilación exitosa** sin errores ni advertencias
-4. **Documentación completa** en README.md
-5. **Código totalmente tipado** con TypeScript
+1. **MCP server implemented** with 7 fully functional tools
+2. **Complete test suite** executed with user-provided test PDF
+3. **Successful compilation** with no errors or warnings
+4. **Complete documentation** in README.md and configuration guides
+5. **Fully typed code** with TypeScript
 
-### 🎯 Listo para usar:
+### 🎯 Ready to Use:
 
-El servidor está completamente funcional y listo para integrarse con Claude Desktop o cualquier cliente MCP compatible.
+The server is fully functional and ready to integrate with Claude Desktop or any MCP-compatible client.
 
-## 🎯 Uso con Claude Desktop
+## 🎯 Usage with Claude Desktop
 
-Una vez configurado, puedes pedirle a Claude:
-- "Lee el PDF en C:/ruta/al/archivo.pdf"
-- "Extrae los metadatos del PDF en..."
-- "Busca la palabra 'ejemplo' en el PDF..."
-- "Lee las páginas 1 a 5 del PDF..."
-- "¿Cuántas páginas tiene el PDF...?"
+Once configured, you can ask Claude:
+- "Read the PDF at C:/path/to/file.pdf"
+- "Extract metadata from the PDF at..."
+- "Search for the word 'example' in the PDF..."
+- "Read pages 1-5 from the PDF..."
+- "How many pages does the PDF have...?"
 
-## ⚡ Compilación y Ejecución
+## ⚡ Build and Execution
 
-El proyecto compila exitosamente sin errores y está listo para usarse.
+The project compiles successfully without errors and is ready for use.
 
 ```bash
-# Instalar dependencias (ya hecho)
+# Install dependencies (already done)
 npm install
 
-# Compilar (ya hecho)
+# Build (already done)
 npm run build
 
-# Ejecutar servidor
+# Start server
 npm start
 ```
 
-## Notas Importantes
+## Important Notes
 
-- No incluye OCR (reconocimiento óptico)
-- Funciona mejor con PDFs bien formados
-- Requiere Node.js para ejecutarse
-- Compatible con Windows, macOS y Linux
+- Does not include OCR (optical character recognition)
+- Works best with well-formed PDFs
+- Requires Node.js to run
+- Compatible with Windows, macOS, and Linux

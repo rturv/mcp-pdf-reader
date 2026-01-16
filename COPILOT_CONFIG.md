@@ -1,41 +1,45 @@
-# Configuración del servidor MCP PDF Reader para GitHub Copilot en VS Code
+# GitHub Copilot Configuration
 
-Este documento explica cómo configurar el servidor MCP PDF Reader para usarlo con GitHub Copilot en Visual Studio Code.
+This guide explains how to configure the MCP PDF Reader server to work with GitHub Copilot in Visual Studio Code.
 
-## Requisitos previos
+## Prerequisites
 
-- Visual Studio Code instalado
-- GitHub Copilot con soporte MCP habilitado
-- Node.js instalado (v18 o superior)
+- Visual Studio Code v1.79 or later
+- GitHub Copilot extension with MCP support enabled
+- Node.js v18 or higher
+- npm or another package manager
 
-## Paso 1: Instalar el paquete
+## Installation
 
-Instala el paquete globalmente desde npm:
+### Option 1: Global npm Installation (Recommended)
 
 ```bash
 npm install -g @rturv/mcp-pdf-reader
 ```
 
-**Nota para desarrollo:** Si estás desarrollando localmente, compila el proyecto:
+### Option 2: From Source (Development)
 
 ```bash
-cd c:\Proyectos\2025\IA\mio\mcp-pdf-reader
+git clone https://github.com/rturv/mcp-pdf-reader.git
+cd mcp-pdf-reader
 npm install
 npm run build
 ```
 
-## Paso 2: Ubicar el archivo de configuración de VS Code
+## Configuration Steps
 
-El archivo de configuración de MCP para VS Code se encuentra en:
+### Step 1: Locate Configuration File
+
+Find the MCP configuration file for VS Code:
 
 **Windows:**
 ```
 %APPDATA%\Code\User\globalStorage\github.copilot-chat\mcpServers.json
 ```
 
-Ruta completa típica:
+Typical full path:
 ```
-C:\Users\[TU_USUARIO]\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\mcpServers.json
+C:\Users\YourUsername\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\mcpServers.json
 ```
 
 **macOS:**
@@ -48,11 +52,13 @@ C:\Users\[TU_USUARIO]\AppData\Roaming\Code\User\globalStorage\github.copilot-cha
 ~/.config/Code/User/globalStorage/github.copilot-chat/mcpServers.json
 ```
 
-## Paso 3: Editar la configuración
+> **Tip:** Use VS Code's file explorer or `Ctrl+K Ctrl+O` to navigate to the folder, or search for `mcpServers.json` in your file system.
 
-Abre el archivo `mcpServers.json` (créalo si no existe) y añade la siguiente configuración:
+### Step 2: Edit Configuration
 
-### Opción A: Usando el paquete npm (recomendado)
+Create or edit `mcpServers.json` and add the PDF Reader configuration.
+
+#### Option A: Using npm Package (Recommended)
 
 ```json
 {
@@ -67,36 +73,39 @@ Abre el archivo `mcpServers.json` (créalo si no existe) y añade la siguiente c
 }
 ```
 
-### Opción B: Desarrollo local (código fuente)
+**Advantages:**
+- No manual paths needed
+- Updates with `npm update -g`
+- Works across different systems
+
+#### Option B: From Source (Development)
 
 ```json
 {
   "mcpServers": {
     "pdf-reader": {
       "command": "node",
-      "args": [
-        "ruta/completa/a/mcp-pdf-reader/dist/index.js"
-      ],
+      "args": ["/absolute/path/to/mcp-pdf-reader/dist/index.js"],
       "disabled": false,
       "alwaysAllow": []
     }
   }
 }
 ```
-> No olvides hacer npm build si vas a utilizar esta vía
 
+**Important:**
+- Use the **absolute path** to `dist/index.js`
+- After pulling updates, run `npm run build`
+- Windows paths: Use forward slashes `/` or double backslashes `\\`
 
-### Notas importantes:
+#### With Other MCP Servers
 
-1. **Opción A (npm)**: Más simple, no necesitas rutas ni recompilar
-2. **Opción B (desarrollo)**: Usa la ruta absoluta completa a tu archivo `dist/index.js`
-3. **Barras invertidas**: En Windows, usa doble barra invertida `\\` o barras normales `/`
-4. **Si ya tienes otros servidores MCP**, añade esta entrada dentro del objeto `mcpServers` existente:
+If you already have other MCP servers configured:
 
 ```json
 {
   "mcpServers": {
-    "otro-servidor": {
+    "existing-server": {
       "command": "...",
       "args": ["..."]
     },
@@ -110,80 +119,208 @@ Abre el archivo `mcpServers.json` (créalo si no existe) y añade la siguiente c
 }
 ```
 
-## Paso 4: Reiniciar VS Code
+### Step 3: Restart VS Code
 
-Después de guardar la configuración, reinicia completamente Visual Studio Code para que los cambios surtan efecto.
+Close VS Code completely and reopen it for the changes to take effect.
 
-## Paso 5: Verificar la instalación
+### Step 4: Verify Installation
 
-1. Abre GitHub Copilot Chat en VS Code (Ctrl+Shift+I o Cmd+Shift+I)
-2. Escribe un mensaje como: "Lista las herramientas MCP disponibles"
-3. Deberías ver las 7 herramientas del servidor PDF Reader:
-   - `read_pdf`
-   - `get_pdf_metadata`
-   - `read_pdf_pages`
-   - `search_pdf`
-   - `get_pdf_page_count`
-   - `list_pdf_images`
-   - `extract_pdf_image`
+1. Open Copilot Chat in VS Code (`Ctrl+Shift+I` or `Cmd+Shift+I`)
+2. Send a message like: *"What PDF tools are available?"*
+3. Copilot should list the 7 available tools
+4. Try a test prompt: *"Read the file C:/path/to/test.pdf"*
 
-## Ejemplo de uso
+**Expected Available Tools:**
+- `read_pdf` - Extract full text
+- `get_pdf_metadata` - Get document metadata
+- `read_pdf_pages` - Extract specific page ranges
+- `search_pdf` - Search for text with context
+- `get_pdf_page_count` - Get total page count
+- `list_pdf_images` - List embedded images
+- `extract_pdf_image` - Extract specific images
 
-Una vez configurado, puedes usar el servidor desde Copilot Chat:
+## Usage Examples
+
+### Example 1: Extract and Analyze
 
 ```
-"Lee el PDF en C:/Documents/documento.pdf"
+Prompt: "Read C:/Documents/research_paper.pdf and extract the key findings"
 
-"Extrae los metadatos del PDF en C:/Users/usuario/archivo.pdf"
-
-"Busca la palabra 'contrato' en el PDF C:/contratos/legal.pdf"
-
-"Lista las imágenes del PDF en C:/presentacion.pdf"
-
-"Extrae la página 5 del PDF en C:/informe.pdf"
+Result: Copilot will:
+1. Call read_pdf with the file path
+2. Parse the content
+3. Identify and summarize key findings
 ```
 
-## Solución de problemas
+### Example 2: Search for Content
 
-### El servidor no aparece en Copilot
+```
+Prompt: "Search for 'conclusion' in C:/Documents/thesis.pdf and show me the context"
 
-1. **Verifica la ruta**: Asegúrate de que la ruta al archivo `dist/index.js` es correcta
-2. **Verifica la compilación**: Ejecuta `npm run build` de nuevo
-3. **Revisa los logs**: Abre la consola de desarrollador en VS Code (Help > Toggle Developer Tools)
-4. **Reinicia VS Code**: Cierra completamente VS Code y vuelve a abrirlo
+Result: Copilot will:
+1. Call search_pdf with the term "conclusion"
+2. Return all matches with surrounding text
+3. Present results in an organized format
+```
 
-### Error al ejecutar el servidor
+### Example 3: Extract Metadata
 
-1. **Node.js no encontrado**: Verifica que Node.js está en tu PATH
-2. **Dependencias**: Ejecuta `npm install` en el directorio del proyecto
-3. **Permisos**: Asegúrate de tener permisos de lectura en la carpeta del proyecto
+```
+Prompt: "Tell me who wrote C:/Documents/presentation.pdf and when it was created"
 
-### Las herramientas no responden
+Result: Copilot will:
+1. Call get_pdf_metadata
+2. Return author, creation date, and other document info
+```
 
-1. **Rutas de archivos**: Asegúrate de usar rutas absolutas al PDF
-2. **Formato de ruta**: En Windows puedes usar `C:/ruta/archivo.pdf` o `C:\\ruta\\archivo.pdf`
-3. **Archivo existe**: Verifica que el archivo PDF existe y tienes permisos de lectura
+### Example 4: Analyze Images
 
-## Herramientas disponibles
+```
+Prompt: "List all images in C:/Documents/annual_report.pdf and extract the first one"
 
-### Herramientas de texto
-- **read_pdf**: Extrae todo el texto del PDF
-- **get_pdf_metadata**: Obtiene metadatos (autor, título, fechas, etc.)
-- **read_pdf_pages**: Lee páginas específicas o rangos
-- **search_pdf**: Busca texto con contexto
-- **get_pdf_page_count**: Cuenta las páginas
+Result: Copilot will:
+1. Call list_pdf_images to get inventory
+2. Call extract_pdf_image for the specific image
+3. Present image details and Base64 data
+```
 
-### Herramientas de imágenes
-- **list_pdf_images**: Lista todas las imágenes con metadatos
-- **extract_pdf_image**: Extrae una imagen en Base64
+### Example 5: Page Range Analysis
 
-## Más información
+```
+Prompt: "Read pages 10-15 of C:/Documents/manual.pdf and summarize"
 
-- [Documentación completa](README.md)
-- [Resumen del proyecto](SUMMARY.md)
-- [Tests](src/__tests__/pdf-tools.test.ts)
+Result: Copilot will:
+1. Call read_pdf_pages with startPage: 10, endPage: 15
+2. Summarize the extracted content
+```
 
----
+## Troubleshooting
 
-**Versión**: 1.0.0  
-**Última actualización**: 14 de enero de 2026
+### Server Not Appearing in Copilot
+
+**Problem:** Tools don't show up  
+**Solutions:**
+1. Verify JSON syntax in `mcpServers.json` (use a JSON validator)
+2. Check that the file path is correct (Option B users)
+3. Ensure `npm install -g @rturv/mcp-pdf-reader` was successful
+4. Completely close and reopen VS Code
+5. Check VS Code logs: `Help > Toggle Developer Tools` (Ctrl+Shift+I in DevTools)
+
+### Command Not Found Error
+
+**Problem:** "mcp-pdf-reader: command not found"  
+**Solutions:**
+```bash
+# Check npm global path
+npm config get prefix
+
+# Reinstall globally
+npm install -g @rturv/mcp-pdf-reader
+
+# Verify installation
+which mcp-pdf-reader    # macOS/Linux
+where mcp-pdf-reader    # Windows
+```
+
+### File Not Found / Access Denied
+
+**Problem:** PDF file can't be read  
+**Solutions:**
+1. Use **absolute paths**, not relative paths
+2. Verify the file exists and you have read permissions
+3. On Windows: Use forward slashes `/` or double backslashes `\\` in paths
+4. Example: `C:/Users/YourName/Documents/file.pdf` or `C:\\Users\\YourName\\Documents\\file.pdf`
+
+### Copilot Doesn't Call the Tools
+
+**Problem:** Copilot doesn't use the PDF tools  
+**Solutions:**
+1. Explicitly ask Copilot to use a tool: *"Use the read_pdf tool to..."*
+2. Provide full file paths in your prompts
+3. Be specific about what you want extracted
+4. Check VS Code output: `View > Output` and select "GitHub Copilot"
+
+### Invalid Configuration Error
+
+**Problem:** Error message about invalid JSON  
+**Solutions:**
+1. Validate JSON syntax (use jsonlint.com or VS Code built-in)
+2. Check for missing commas or quotes
+3. Ensure all strings are quoted with double quotes `"`
+4. Verify no trailing commas in objects/arrays
+
+## Advanced Configuration
+
+### Disable/Enable Server
+
+Temporarily disable the server without removing it:
+
+```json
+{
+  "mcpServers": {
+    "pdf-reader": {
+      "command": "mcp-pdf-reader",
+      "disabled": true
+    }
+  }
+}
+```
+
+Set `"disabled": false` to re-enable.
+
+### Always Allow Permissions
+
+Some Copilot versions may ask for permission to use MCP tools. To skip confirmation:
+
+```json
+{
+  "mcpServers": {
+    "pdf-reader": {
+      "command": "mcp-pdf-reader",
+      "alwaysAllow": ["*"]
+    }
+  }
+}
+```
+
+### Custom Server Name
+
+You can give the server a different name in your configuration:
+
+```json
+{
+  "mcpServers": {
+    "my-pdf-tool": {
+      "command": "mcp-pdf-reader"
+    }
+  }
+}
+```
+
+## Available Tools Detailed
+
+| Tool | Purpose | Main Parameters |
+|------|---------|-----------------|
+| `read_pdf` | Extract all text | `filePath`, `includeMetadata` |
+| `get_pdf_metadata` | Get document info | `filePath` |
+| `read_pdf_pages` | Extract page range | `filePath`, `startPage`, `endPage` |
+| `search_pdf` | Find text | `filePath`, `searchTerm`, `caseSensitive` |
+| `get_pdf_page_count` | Count pages | `filePath` |
+| `list_pdf_images` | Discover images | `filePath` |
+| `extract_pdf_image` | Get image data | `filePath`, `imageIndex` |
+
+See [Tools Reference](README.md#tools-reference) for complete documentation.
+
+## Related Documentation
+
+- [Main README](README.md) - Complete project documentation
+- [Tools Reference](README.md#tools-reference) - Detailed tool documentation
+- [Testing with MCP Inspector](README.md#testing-with-mcp-inspector) - Debug and test tools
+- [Claude Configuration](CLAUDE_CONFIG.md) - Setup for Claude Desktop
+
+## Version & Support
+
+**Current Version:** 1.0.0  
+**Package:** `@rturv/mcp-pdf-reader`  
+**Repository:** [github.com/rturv/mcp-pdf-reader](https://github.com/rturv/mcp-pdf-reader)  
+**Issues:** [Report bugs here](https://github.com/rturv/mcp-pdf-reader/issues)

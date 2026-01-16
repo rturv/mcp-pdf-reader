@@ -1,7 +1,7 @@
 {
   "name": "@rturv/mcp-pdf-reader",
-  "version": "0.0.1",
-  "description": "MCP Server for reading and extracting information from PDF files",
+  "version": "1.0.0",
+  "description": "A Model Context Protocol (MCP) server that enables AI assistants (Claude, GitHub Copilot) to read, extract text, search, and analyze PDF files with full metadata and image extraction support",
   "main": "dist/index.js",
   "type": "module",
   "bin": {
@@ -18,13 +18,19 @@
   },
   "keywords": [
     "mcp",
-    "pdf",
-    "reader",
     "model-context-protocol",
+    "pdf",
+    "pdf-reader",
     "pdf-extraction",
-    "copilot",
+    "text-extraction",
+    "metadata-extraction",
+    "image-extraction",
+    "pdf-search",
     "claude",
-    "anthropic"
+    "github-copilot",
+    "ai-assistant",
+    "anthropic",
+    "tool"
   ],
   "author": "rturv",
   "license": "MIT",
